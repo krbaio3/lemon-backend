@@ -1,0 +1,1 @@
+docker run -d --name mymovies -p 27017:27017 mongo:5.0.9

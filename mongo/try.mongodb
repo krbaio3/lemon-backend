@@ -1,0 +1,178 @@
+use('academia');
+
+db.cursos.insertMany([
+    {
+        titulos: "Bootcamp Backend"
+    },
+    {
+        titulos: "Bootcamp DevOps"
+    },
+    {
+        titulos: "Master Front End"
+    },
+    {
+        titulos: "Bootcamp Mobile Development"
+    },
+]);
+
+db.cursos.find().pretty();
+
+use('academia');
+db.cursos.insertOne({
+    titulo: "Bootcamp Movilidad",
+    fecha: new Date('2021-06-01')
+})
+
+db.cursos.replaceOne(
+    { 
+        _id: ObjectId("62c174cd3aa0babc1fa4a489")
+    },
+    {
+        titulo: "Bootcamp Movilidad Native",
+    }
+);
+
+db.cursos.updateOne(
+    {
+        _id: ObjectId("62c174cd3aa0babc1fa4a489")
+    },
+    {
+        $set: {
+            fecha: new Date('2021-06-01')
+        }
+    }
+);
+
+use('academia');
+db.cursos.find().pretty();
+
+use('academia');
+db.cursos.deleteOne({
+    _id: ObjectId("62c1756f46c9336938618cae")
+});
+db.cursos.find().pretty();
+
+// no existe
+db.cursos.deleteMany({
+    titulo: "Bootcamp Movilidad"
+});
+
+db.cursos.find();
+
+// crear una coleccion que se llame profesores
+use('academia');
+db.profesores.find();
+
+db.createCollection('profesores');
+
+// agregar el siguiente profesor
+
+db.profesores.insertOne(
+    {
+        nombre: "Daniel Sánchez",
+        minibio: "Desarrollador Lemoncoder, especializado en el area de Front End (React) y Backend (nodejs + .net). Amante de las nuevas tecnologías y siempre en estado de renovación continua.",
+        cursos: [],
+    }
+);
+
+// agregamos tres profesores del tiron
+
+db.profesores.insertMany([{
+  nombre: "Victor Borrego",
+  minibio: "De fullstack developer con MVC, C# y javascript, a sumergirme en el apasionante mundo del Frontend, enganchado a React y Node.js, entusiasmado por el abanico de posibilidades que ofrece el desarrollo web.",
+  cursos: [],
+},
+{
+  nombre: "Gisela Torres",
+  minibio: "Actualmente trabaja en Microsoft como Cloud Solution Architect. También trabajó como arquitecta de software y desarrolladora de aplicaciones en varias empresas donde fue premiada como MVP en Microsoft Azure.",
+  cursos: [],
+},
+{
+  nombre: "Diego Martín",
+  minibio: "Ingeniero/Arquitecto especializado en .NET C# con más de una década de experiencia desarrollando aplicaciones web en empresas de Nueva Zelanda y España. Entusiasta de Domain Driven Design, Event Sourcing y arquitecturas distribuidas.",
+  cursos: [],
+}])
+
+db.profesores.find()
+
+
+use('academia');
+
+db.getCollectionNames();
+
+// db.alumnos.drop();
+db.createCollection('alumnos');
+
+use('academia');
+db.alumnos.insertMany([
+  {
+    nombre: "Juan Perez",
+    email: "juan@correo.com",
+    direccion: {
+      calle: "C/ peral, numero 2",
+      cp: "28435",
+      localidad: "Madrid",
+    },
+    cursos: [
+      {
+        id: ObjectId("6099151dad7962fb0f26f492"),
+        nombre: "Master Front End",
+      },
+      {
+        id: ObjectId("6099151dad7962fb0f26f491"),
+        nombre: "Bootcamp Devops",
+      },
+    ],
+  },
+  {
+    nombre: "Manuel Lopez",
+    email: "manuel@correo.com",
+    direccion: {
+      calle: "C/ Hemingway, numero 45",
+      cp: "17034",
+      localidad: "Pontevedra",
+    },
+    cursos: [
+      {
+        id: ObjectId("6099151dad7962fb0f26f490"),
+        nombre: "Bootcamp Backend",
+      },
+    ],
+  },
+]);
+
+use('academia');
+db.alumnos.find();
+
+use('academia');
+db.alumnos.updateOne(
+  {
+    _id: ObjectId("62c172edf4b0718db5c98ae1")
+  },
+  {
+    $set: {
+      direccion: {
+        localidad: "Huelva"
+      }
+    }
+  }
+);
+
+
+use('academia');
+db.alumnos.find();
+
+use('academia');
+db.alumnos.updateOne(
+  {
+    _id: ObjectId("62c172edf4b0718db5c98ae2")
+  },
+  {
+    $push: {
+      cursos: {
+        id: new ObjectId(),
+        nombre: "Bootcamp UX",
+      },
+    },
+  }
+);
